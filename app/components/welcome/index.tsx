@@ -332,7 +332,6 @@ const Welcome: FC<IWelcomeProps> = ({
           </div>
         )}
       </div>
-    </div >
   )
 }
 
