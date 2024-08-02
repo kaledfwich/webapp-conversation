@@ -297,50 +297,40 @@ const Welcome: FC<IWelcomeProps> = ({
 
 import React from 'react';
 
-const Welcome = ({ hasSetInputs, hasVar, renderHeader, renderVarPanel, renderNoVarPanel, renderHasSetInputs, siteInfo, t }) => {
-
-    return (
+const Welcome = ({ hasSetInputs, renderHeader, renderVarPanel, renderNoVarPanel, renderHasSetInputs, siteInfo, t }) => {
+  return (
     <div className='relative mobile:min-h-[48px] tablet:min-h-[64px]'>
       {hasSetInputs && renderHeader()}
       <div className='mx-auto pc:w-[794px] max-w-full mobile:w-full px-3.5'>
-        {/*  Has't set inputs  */}
-        {
-          !hasSetInputs && (
-            <div className='mobile:pt-[72px] tablet:pt-[128px] pc:pt-[200px]'>
-              {hasVar
-                ? (
-                  renderVarPanel()
-                )
-                : (
-                  renderNoVarPanel()
-                )}
-            </div>
-          )
-        }
+        {/* Hasn't set inputs */}
+        {!hasSetInputs && (
+          <div className='mobile:pt-[72px] tablet:pt-[128px] pc:pt-[200px]'>
+            {hasVar ? renderVarPanel() : renderNoVarPanel()}
+          </div>
+        )}
 
         {/* Has set inputs */}
         {hasSetInputs && renderHasSetInputs()}
 
-        {/* foot */}
+        {/* Footer */}
         {!hasSetInputs && (
           <div className='mt-4 flex justify-between items-center h-8 text-xs text-gray-400'>
-
-            {siteInfo.privacy_policy
-              ? <div>{t('app.chat.privacyPolicyLeft')}
-                <a
-                  className='text-gray-500'
-                  href={siteInfo.privacy_policy}
-                  target='_blank'>{t('app.chat.privacyPolicyMiddle')}</a>
+            {siteInfo.privacy_policy && (
+              <div>
+                {t('app.chat.privacyPolicyLeft')}
+                <a className='text-gray-500' href={siteInfo.privacy_policy} target='_blank' rel='noopener noreferrer'>
+                  {t('app.chat.privacyPolicyMiddle')}
+                </a>
                 {t('app.chat.privacyPolicyRight')}
               </div>
-              : null}
+            )}
           </div>
         )}
       </div>
-    </div> /* Adicionado fechamento da tag <div> */
-  )
-}
+    </div>
+  );
+};
 
-export default React.memo(Welcome)
+export default React.memo(Welcome);
 
 
